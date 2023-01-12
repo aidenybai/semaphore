@@ -17,10 +17,10 @@
       el.addEventListener('input', () => {
         const barcode = el.value;
         if (cache.has(barcode)) return;
-        console.log('Barcode scanned: ', barcode)
+        console.log('Barcode scanned: ', barcode);
 
         cache.add(barcode);
-        window.open(
+        fetch(
           `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}`
         );
       });
