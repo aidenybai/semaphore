@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Semaphore</title>
+  </head>
+  <body>
+    <article>
+      <input id="live" />
+    </article>
+    <script>
+      const el = document.getElementById('live');
+      const cache = new Set();
+      el.addEventListener('input', () => {
+        const barcode = el.value;
+        if (cache.has(barcode)) return;
+        console.log('Barcode scanned: ', barcode)
+
+        cache.add(barcode);
+        window.open(
+          `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}`
+        );
+      });
+    </script>
+  </body>
+</html>
