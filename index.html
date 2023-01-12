@@ -20,9 +20,33 @@
         console.log('Barcode scanned: ', barcode);
 
         cache.add(barcode);
-        fetch(
-          `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}`
-        );
+
+        const body = new FormData();
+        body.append('emailAddress', 'aiden.bai@csd117.org')
+        body.append('entry.1389400341', barcode);
+        body.append('fvv', '1');
+        body.append('submit', 'Submit');
+
+        const formId =
+          '1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw';
+        const queryString = '/formResponse';
+        const url = `https://docs.google.com/forms/d/e/${formId}${queryString}`;
+
+        const opts = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body,
+        };
+
+        fetch(url, opts)
+          .then((response) => {
+            console.log(response.ok);
+          })
+          .catch((error) => {
+            console.log(response.ok);
+          });
       });
     </script>
   </body>
