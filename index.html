@@ -26,6 +26,10 @@
           cache.add(barcode);
 
           const iframe = document.createElement('iframe');
+          iframe.width = '1';
+          iframe.height = '1';
+          iframe.style.width = '1px';
+          iframe.style.height = '1px';
           document.body.appendChild(iframe);
           iframe.src = `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}`;
           setTimeout(() => {
