@@ -22,17 +22,13 @@
       });
 
       const el = document.getElementById('live');
-      const cache = new Set();
       let timeout = null;
       el.addEventListener('input', () => {
         const barcode = el.value;
         if (!barcode || barcode.length !== 7) return;
-        if (cache.has(barcode)) return;
         if (timeout) clearTimeout(timeout);
         timeout = setTimeout(() => {
           console.log('Barcode scanned: ', barcode);
-
-          cache.add(barcode);
 
           const iframe = document.createElement('iframe');
           iframe.width = '1';
@@ -44,7 +40,7 @@
           setTimeout(() => {
             iframe.remove();
           }, 60000);
-        }, 1000);
+        }, 500);
       });
       setInterval(() => {
         el.value = '';
