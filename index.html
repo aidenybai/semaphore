@@ -26,7 +26,7 @@
       let timeout = null;
       el.addEventListener('input', () => {
         const barcode = el.value;
-        if (!barcode || barcode.length !== 8) return;
+        if (!barcode || barcode.length !== 7) return;
         if (cache.has(barcode)) return;
         if (timeout) clearTimeout(timeout);
         timeout = setTimeout(() => {
