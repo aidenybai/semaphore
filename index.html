@@ -14,7 +14,7 @@
     </article>
     <script>
       const room = document.getElementById('room');
-      room.value = localStorage.get('room') || '';
+      room.value = localStorage.getItem('room') || '';
       const el = document.getElementById('live');
       const cache = new Set();
       let timeout = null;
