@@ -9,18 +9,21 @@
   </head>
   <body>
     <article>
-      <input id="room" type="number" maxlength="3" placeholder="Room number" />
-      <input id="live" type="text" maxlength="8" placeholder="Barcode (automatically empties)" />
+      <input
+        id="live"
+        type="text"
+        maxlength="8"
+        placeholder="Barcode (automatically empties)"
+      />
     </article>
     <script>
-      const room = document.getElementById('room');
-      room.value = localStorage.getItem('room') || '';
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+
       const el = document.getElementById('live');
       const cache = new Set();
       let timeout = null;
-      room.addEventListener('input', () => {
-        localStorage.setItem('room', room.value);
-      });
       el.addEventListener('input', () => {
         const barcode = el.value;
         if (!barcode || barcode.length !== 8) return;
@@ -37,7 +40,7 @@
           iframe.style.width = '1px';
           iframe.style.height = '1px';
           document.body.appendChild(iframe);
-          iframe.src = `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}&entry.1959889881=${room.value}`;
+          iframe.src = `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}&entry.1959889881=${params.room}`;
           setTimeout(() => {
             iframe.remove();
           }, 60000);
