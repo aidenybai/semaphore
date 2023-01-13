@@ -14,20 +14,29 @@
     <script>
       const el = document.getElementById('live');
       const cache = new Set();
+      let timeout = null;
       el.addEventListener('input', () => {
         const barcode = el.value;
+        if (!barcode) return;
         if (cache.has(barcode)) return;
-        console.log('Barcode scanned: ', barcode);
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          console.log('Barcode scanned: ', barcode);
 
-        cache.add(barcode);
+          cache.add(barcode);
 
-        const iframe = document.createElement('iframe');
-        document.body.appendChild(iframe);
-        iframe.src = `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}`;
-        setTimeout(() => {
-          iframe.remove();
+          const iframe = document.createElement('iframe');
+          document.body.appendChild(iframe);
+          iframe.src = `https://docs.google.com/forms/d/e/1FAIpQLSeEao2Zx2YnwVpJ3I51yWsZrwAdoY-oveur_KtbdxVfJdnikw/formResponse?entry.1389400341=${barcode}`;
+          setTimeout(() => {
+            iframe.remove();
+          }, 60000);
         }, 1000);
       });
+      setInterval(() => {
+        el.value = '';
+
+      }, 1)
     </script>
   </body>
 </html>
