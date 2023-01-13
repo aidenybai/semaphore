@@ -9,8 +9,8 @@
   </head>
   <body>
     <article>
-      <input id="room" placeholder="Room number" />
-      <input id="live" placeholder="Barcode (automatically empties)" />
+      <input id="room" type="number" maxlength="3" placeholder="Room number" />
+      <input id="live" type="text" maxlength="8" placeholder="Barcode (automatically empties)" />
     </article>
     <script>
       const room = document.getElementById('room');
